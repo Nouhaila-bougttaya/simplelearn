@@ -15,8 +15,8 @@ class FlashCard(tk.Frame):
         color_canvas.pack(side=tk.TOP, padx=10, pady=10)
 
         # Create a label for the flashcard's name
-        name_label = tk.Label(color_canvas, text=self.flashcard.name, font=("TkDefaultFont", 18, "bold"), bg=self.flashcard.color)
-        name_label.pack(side=tk.TOP, padx=10, pady=10)
+        name_label = tk.Label(color_canvas, text=self.flashcard.name, font=("Arial",16), bg=self.flashcard.color)
+        name_label.pack(side="top", expand=True)
 
         # Create a label for modifying the flashcard
         modify_label = tk.Label(color_canvas, text="Modify", fg="blue", cursor="hand2", bg=self.flashcard.color)

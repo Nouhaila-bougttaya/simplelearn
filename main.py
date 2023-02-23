@@ -21,10 +21,11 @@ class App(tk.Tk):
        # last_time = last_time_visited()
         # Setting up Initial parameters
 
-
         # Setting up Initial parameters
         self.title(f"Easylearn")
-        self.geometry("800x600")
+        #self.geometry("800x600")
+        self.state("zoomed")
+        self.minsize(480,360)
         self.resizable(False, False)
         self.center_win()
 

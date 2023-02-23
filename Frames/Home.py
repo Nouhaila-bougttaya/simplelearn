@@ -56,7 +56,7 @@ class Homepage(tk.Frame):
 
         # flashcard frame
         self.flashcard_frame = tk.Frame(self, bg="beige")
-        self.flashcard_frame.grid(row=1, column=0, sticky="nsew")
+        self.flashcard_frame.place(relx=0.5, rely=0.5, anchor="center")
         self.load_flashcards()
 
     def clear_flashcards_frame(self):
@@ -67,8 +67,8 @@ class Homepage(tk.Frame):
 
         # Define the window and grid dimensions
 
-        num_rows = 3
-        num_cols = 4
+        num_rows = 5
+        num_cols = 3
 
         # Read in the CSV file using pandas
         df = pd.read_csv('data/personalised.csv')
@@ -97,12 +97,17 @@ class Homepage(tk.Frame):
 
                     flashcard_widget = Flascard_widget(self.flashcard_frame, flashcard=flashcard_objet,
                                                        controller=self.controller)
-                    flashcard_widget.grid(row=i, column=j, padx=10, pady=10)
+                    #la taille des flashcards
+                    flashcard_widget.grid(row=i, column=j, padx=5, pady=5,ipady=50,ipadx=150)
 
                     # Add a canvas with the color attribute to the frame
                     # self.canvas = tk.Canvas(self.frame, width=50, height=50, bg=color)
                     # Create a text object inside the canvas
                     # Todo 9adi les parametre bax text yji center name of the flashcards
                     # self.canvas.create_text(20, 10, text=name, anchor="center")
-
-        self.flashcard_frame.grid(row=1, column=0, sticky="nsew")
+        
+        #self.flashcard_frame.grid(row=1, column=0, sticky="nsew")
+        # Set the size of the flashcard frame
+        frame_width = num_cols * 200  # adjust as needed
+        frame_height = num_rows * 200  # adjust as needed
+        self.flashcard_frame.config(width=frame_width, height=frame_height)
