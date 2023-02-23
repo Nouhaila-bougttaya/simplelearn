@@ -20,8 +20,6 @@ class App(tk.Tk):
         super().__init__()
        # last_time = last_time_visited()
         # Setting up Initial parameters
-
-
         # Setting up Initial parameters
         self.title(f"Easylearn")
         #self.geometry("800x600")
