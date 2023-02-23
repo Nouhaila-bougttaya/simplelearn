@@ -12,6 +12,7 @@ import customtkinter as ctk
 
 # from utils import COLORS, FONT
 
+#bg
 
 class Homepage(tk.Frame):
     # la création des widgets
