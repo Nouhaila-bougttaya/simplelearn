@@ -20,7 +20,7 @@ class FlashCard(tk.Frame):
 
         # Create a label for modifying the flashcard
         modify_label = tk.Label(color_canvas, text="Modify", fg="blue", cursor="hand2", bg=self.flashcard.color)
-        modify_label.pack(side=tk.TOP, padx=10, pady=10)
+        modify_label.pack(side=tk.LEFT, padx=10, pady=10)
 
         modify_label.bind("<Button-1>", lambda e: self.controller.show_frame("EditFlashCard",self.flashcard))
         self.bind("<Button-1>", lambda e: self.controller.show_frame("ScrollCards", self.flashcard))

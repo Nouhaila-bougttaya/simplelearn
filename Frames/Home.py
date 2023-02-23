@@ -35,10 +35,14 @@ class Homepage(tk.Frame):
         # floating button to add flashcard
         self.addbtn_frame = tk.Frame(self, bg="white")
         self.addbtn = tk.PhotoImage(file="images/Bouton+.png")
+        self.addbtn_hover = tk.PhotoImage(file="images/Bouton+ (2).png")
         self.addbtn = self.addbtn.subsample(1, 1)
+        self.addbtn_hover = self.addbtn_hover.subsample(1, 1)
         self.addbtn_label = tk.Label(self.addbtn_frame, image=self.addbtn, bg="beige", cursor="hand2")
         self.addbtn_label.grid()
         self.addbtn_label.bind("<Button-1>", lambda e: self.controller.show_frame("AddFlashCard"))
+        self.addbtn_label.bind("<Enter>", lambda e: self.addbtn_label.config(image=self.addbtn_hover))
+        self.addbtn_label.bind("<Leave>", lambda e: self.addbtn_label.config(image=self.addbtn))
         # self.addbtn_frame.grid(column=2)
         self.addbtn_frame.grid(column=10, row=15, sticky="se")
 
