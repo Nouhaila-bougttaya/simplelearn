@@ -25,7 +25,7 @@ class Homepage(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
 
-        # variables
+        # variabes
         self.cards_type = True
         self.flashcards = []
         self.configure(bg='beige')
