@@ -62,7 +62,7 @@ class Homepage(tk.Frame):
     def clear_flashcards_frame(self):
         for widget in self.flashcard_frame.winfo_children():
             widget.destroy()
-
+#nnn
     def load_flashcards(self):
 
         # Define the window and grid dimensions
