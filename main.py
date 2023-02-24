@@ -11,6 +11,7 @@ from Frames.scroll_card import ScrollCards
 from Frames.Home import Homepage
 from Frames.addflashcard import AddFlashCard
 from Frames.EditFlashcard import EditFlashCard
+from Frames.WelcomePage import WelcomePage
 
 
 
@@ -35,8 +36,9 @@ class App(tk.Tk):
 
         self.container = tk.Frame(self, bg="white")
         self.container.pack(side="top", fill="both", expand = True)
-
-        self.show_frame("Home")
+        
+        #self.show_frame("Home")
+        self.show_frame("WelcomePage")
 
     def show_frame(self, page_name ,*args):
 
@@ -53,7 +55,9 @@ class App(tk.Tk):
             frame = EditFlashCard(parent=self.container, controller=self, flashcard=args[0])
         elif page_name == "ScrollCards":
             frame = ScrollCards(parent=self.container, controller=self, flashcard=args[0])
-
+        elif page_name == "WelcomePage":
+            frame = WelcomePage(parent=self.container, controller=self)
+        
         frame.pack(side="top", fill="both", expand=True)
         frame.tkraise()
         self.center_win()
