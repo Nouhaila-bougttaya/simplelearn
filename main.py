@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import *
 
 import customtkinter as ctk
+from tkinter import messagebox
 
 #from frames.AddFlashCard import AddFlashCard
 #from frames.Cards import Cards

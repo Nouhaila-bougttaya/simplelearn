@@ -57,9 +57,19 @@ class AddFlashCard(tk.Frame):
         add_card_button = tk.Button(self, text="Add", command=self.add_card_callback)
         add_card_button.pack()
 
+    
     def add_card_callback(self):
         word = self.word_entry.get()
         translation = self.translation_entry.get()
+        if not word and not translation:
+            tk.messagebox.showerror("Erreur", "S'il vous plait enter les deux un mot et sa traduction.")
+            return
+        if not word :
+            tk.messagebox.showerror("Erreur", "Veuillez entrer un mot .")
+            return
+        if not translation:
+            tk.messagebox.showerror("Erreur", "Veuillez entrer une traduction de mot.")
+            return
 
         if self.flashcard is None:
             name = self.name_entry.get()
@@ -71,21 +81,29 @@ class AddFlashCard(tk.Frame):
 
         #self.card_list.append(card)
         self.card_listbox.insert(tk.END, f"{card.word} - {card.translation}")
+    
     def save_flashcard(self):
         # Create a Flashcard object from the input fields and save it to a CSV file
         name = self.name_entry.get()
         color = self.color_entry.get()
-
+        if not name  and not color:
+            tk.messagebox.showerror("Erreur", "Veuillez entrer le nom et la couleur de la nouvelle flashcard à créer.")
+            return
+        if not name :
+            tk.messagebox.showerror("Erreur", "Veuillez entrer le nom de la flashcard que vous voulez créer.")
+            return
+        if not color:
+            tk.messagebox.showerror("Erreur", "Veuillez choisir une couleur.")
+            return
+                
+        # Afficher un message de confirmation
+        else:
+            tk.messagebox.showinfo("Succès", f"Le mot et sa traduction sont bien stocker dans la flashcard")
+                
         cards = self.flashcard.cards
         print(cards)
         df = pd.DataFrame([[card.word, card.translation] for card in cards], columns=["French", "English"])
         df.to_csv(f"data/{name}.csv", index=False)
-
-        # Add flashcard name and color to personalised.csv file
-        personalised_df = pd.read_csv("data/personalised.csv")
-        new_row = {"name": name, "color": color}
-        personalised_df = personalised_df.append(new_row, ignore_index=True)
-        personalised_df.to_csv("data/personalised.csv", index=False)
 
         ###going back home
         self.controller.show_frame("Home")
