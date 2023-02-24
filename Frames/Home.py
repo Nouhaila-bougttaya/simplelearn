@@ -2,7 +2,7 @@ import os
 import sys
 import tkinter as tk
 import pandas as pd
-
+from datetime import datetime, timedelta
 from Frames.Fram_Flashcard import FlashCard as Flascard_widget
 from classes.flashcard import Flashcard as FlashcardClass
 from classes.card import Card as CardClass
@@ -29,6 +29,8 @@ class Homepage(tk.Frame):
         self.cards_type = True
         self.flashcards = []
         self.configure(bg='beige')
+        self.notification = FlashcardClass("notification", "")
+
         # top frame
         self.top_frame = tk.Frame(self, bg="white")
         self.top_frame.grid(row=0, column=0, sticky="ew")
@@ -39,30 +41,51 @@ class Homepage(tk.Frame):
         self.addbtn_label = tk.Label(self.addbtn_frame, image=self.addbtn, bg="beige", cursor="hand2")
         self.addbtn_label.grid()
         self.addbtn_label.bind("<Button-1>", lambda e: self.controller.show_frame("AddFlashCard"))
-        # self.addbtn_frame.grid(column=2)
+        ###
+        ##Todo button of notification
+        #self.addbtn_label.bind("<Button-1>", lambda e:self.controller.show_frame("ScrollCards", self.notification) )
         self.addbtn_frame.grid(column=10, row=15, sticky="se")
 
-        # self.dpbtn_image = tk.PhotoImage(file='./assets/default_fc.png')
-        # self.dpbtn_image = self.dpbtn_image.subsample(3, 3)
-        # self.dpbtn_label = tk.Label(self.top_frame, image=self.dpbtn_image, bg="white", cursor="hand2")
-        # self.dpbtn_label.bind("<Button-1>", lambda e: self.switch_default_personalized_cards())
 
-        # self.dpbtn = tk.Button(self.top_frame, text="Default cards", bg=COLORS['primary'],relief = "groove", fg="white", font=FONT["button"])
-        # self.dpbtn.config(command=self.switch_default_personalized_cards)
-        # self.dpbtn.pack(side="right", padx=10, pady=10)
-        # self.dpbtn_label.pack(side="right", padx=10, pady=10)
 
-        # self.top_frame.pack(side="top", fill="x", expand=False)
+
+
 
         # flashcard frame
         self.flashcard_frame = tk.Frame(self, bg="beige")
         self.flashcard_frame.place(relx=0.5, rely=0.5, anchor="center")
         self.load_flashcards()
+        self.loead_notification()
+    def loead_notification(self):
+
+        # Load flashcards from file
+        try:
+            df = pd.read_csv('data/user.csv')
+        except FileNotFoundError:
+            return []
+
+            # convert date_of_notification column to datetime
+        df['date_of_notification'] = pd.to_datetime(df['date_of_notification'])
+
+        # get today's date
+        today = datetime.now().date()
+
+        # filter the DataFrame to only include cards that have a date_of_notification equal to today
+        df = df[df['date_of_notification'].dt.date == today]
+
+        # list of Card objects from the filtered DataFrame
+
+        for _, row in df.iterrows():
+
+            card = CardClass(row['word'], row['translation'], row['try'], row['date_of_notification'])
+
+            self.notification.add_card(card)
+
 
     def clear_flashcards_frame(self):
         for widget in self.flashcard_frame.winfo_children():
             widget.destroy()
-#nnn
+
     def load_flashcards(self):
 
         # Define the window and grid dimensions
